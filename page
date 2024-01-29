@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Python Page</title>
+</head>
+<body>
+    <input type="text" id="input1">
+    <button onclick="sendData()">tool</button>
+    <br>
+    <input type="text" id="input2">
+    <button onclick="sendData()">how many lots</button>
+    <br>
+    <input type="text" id="input3">
+    <button onclick="sendData()">how many times</button>
+    <br>
+    <input type="text" id="input4">
+    <button onclick="sendData()">time before</button>
+    <br>
+    <input type="text" id="input5">
+    <button onclick="sendData()">SAMPLE TEXT</button>
+    <br>
+
+    <div id="output1"></div>
+    <div id="output2"></div>
+    <div id="output3"></div>
+    <div id="output4"></div>
+    <div id="output5"></div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js">
+        function sendData() {
+            var input1 = document.getElementById('input1').value;
+            var input2 = document.getElementById('input2').value;
+            var input3 = document.getElementById('input3').value;
+            var input4 = document.getElementById('input4').value;
+            var input5 = document.getElementById('input5').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "python_script.py", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('output1').innerText = xhr.responseText;
+                    document.getElementById('output2').innerText = xhr.responseText;
+                    document.getElementById('output3').innerText = xhr.responseText;
+                    document.getElementById('output4').innerText = xhr.responseText;
+                    document.getElementById('output5').innerText = xhr.responseText;
+                }
+            };
+            xhr.send("input1=" + input1 + "&input2=" + input2 + "&input3=" + input3 + "&input4=" + input4 + "&input5=" + input5);
+        }
+    </script>
+</body>
+</html>
